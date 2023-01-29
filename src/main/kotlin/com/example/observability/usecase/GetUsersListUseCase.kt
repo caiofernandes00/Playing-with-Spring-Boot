@@ -5,7 +5,10 @@ import com.example.observability.usecase.input.GetUsersByAgeInput
 import com.example.observability.usecase.input.GetUsersByAgeRangeInput
 import com.example.observability.usecase.input.GetUsersByNameInput
 import com.example.observability.usecase.output.GetUsersOutput
+import org.springframework.stereotype.Service
 
+
+@Service
 class GetUsersListUseCase(
     private val userRepository: IUserRepository
 ) {

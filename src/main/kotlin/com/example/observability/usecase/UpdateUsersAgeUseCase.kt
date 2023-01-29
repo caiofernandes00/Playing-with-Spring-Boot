@@ -1,14 +1,14 @@
 package com.example.observability.usecase
 
+import com.example.observability.domain.repository.IUserRepository
 import com.example.observability.domain.service.UsersService
-import com.example.observability.infrastructure.repository.UserRepository
 import com.example.observability.usecase.input.UpdateUsersAgeInput
 import org.springframework.stereotype.Service
 
 @Service
 class UpdateUsersAgeUseCase(
     private val usersService: UsersService,
-    private val userRepository: UserRepository
+    private val userRepository: IUserRepository
 ) {
 
     fun increase(updateUsersAgeInput: UpdateUsersAgeInput) {
