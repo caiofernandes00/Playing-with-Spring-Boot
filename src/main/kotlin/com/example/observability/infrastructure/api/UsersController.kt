@@ -13,7 +13,7 @@ class UsersController(
 ) {
 
     @GetMapping("/users")
-    @CounterMetric("get_users_list")
+    @CounterMetric(name = "get_users_list_counter", description = "Get users list", tags = ["tag1", "tag2"])
     fun getUsers(): GetUsersOutput {
         return getUsersListUseCase.getAll()
     }
