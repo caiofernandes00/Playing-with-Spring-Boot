@@ -1,0 +1,20 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  #  TODO: Understand all the options
+  receiver: 'observability-series-kotlin-edition-app'
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1m
+
+receivers:
+  - name: 'observability-series-kotlin-edition-app'
+    webhook_configs:
+      - url: 'http://observability-series-kotlin-edition-alertmanager:9093/api/v1/alerts'
+        send_resolved: true
+
+# TODO: Understand how to use templates
+templates:
+  - '/etc/alertmanager/template/*.tmpl'

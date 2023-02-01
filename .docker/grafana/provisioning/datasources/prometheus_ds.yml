@@ -1,0 +1,6 @@
+datasources:
+  - name: Prometheus
+    access: proxy
+    type: prometheus
+    url: http://observability-series-kotlin-edition-prometheus:9090
+    isDefault: true

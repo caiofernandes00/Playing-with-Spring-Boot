@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 6s
+  scrape_timeout: 5s
+
+rule_files:
+  - 'alerting.rules.yml'
+
+scrape_configs:
+  - job_name: services
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - 'observability-series-kotlin-edition-app:8080'
+          - 'idonotexists:564'
+  - job_name: containers
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'localhost:9090'
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+            - "observability-series-kotlin-edition-alertmanager:9093"
