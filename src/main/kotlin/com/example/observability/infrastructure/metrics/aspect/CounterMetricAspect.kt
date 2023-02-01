@@ -23,12 +23,14 @@ class CounterMetricAspect(
     @Around("counterMetricPointcut(counterMetric)")
     @Throws(Throwable::class)
     fun around(joinPoint: ProceedingJoinPoint, counterMetric: CounterMetric): Any {
+        val result = joinPoint.proceed()
+
         val counter: Counter = Counter.builder(counterMetric.name)
             .description(counterMetric.description)
             .tags(*counterMetric.tags)
             .register(meterRegistry)
-
         counter.increment()
-        return joinPoint.proceed()
+
+        return result
     }
 }

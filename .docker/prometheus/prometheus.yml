@@ -10,7 +10,7 @@ scrape_configs:
     metrics_path: /actuator/prometheus
     static_configs:
       - targets:
-          - 'observability-series-kotlin-edition-app:8080'
+          - 'host.docker.internal:8080'
           - 'idonotexists:564'
   - job_name: containers
     metrics_path: /metrics

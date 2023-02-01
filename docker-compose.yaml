@@ -1,20 +1,16 @@
 version: '3.8'
 
-
 services:
   app:
-    build:
-        context: .
-        dockerfile: Dockerfile-local
+    build: .
     container_name: observability-series-kotlin-edition-app
+    hostname: observability-series-kotlin-edition-app
     ports:
       - "8080:8080"
     networks:
       - observability-series-kotlin-edition-network
-    volumes:
-      - .:/app
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8080/actuator/health"]
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:8080/actuator/health" ]
 
   prometheus:
     image: prom/prometheus
@@ -34,7 +30,7 @@ services:
       alertmanager:
         condition: service_started
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:9090/-/healthy"]
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:9090/-/healthy" ]
 
   alertmanager:
     image: prom/alertmanager
@@ -50,7 +46,7 @@ services:
       - --log.level=debug
       - --config.file=/etc/alertmanager/alertmanager.yml
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:9093/-/healthy"]
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:9093/-/healthy" ]
 
   grafana:
     image: grafana/grafana:7.5.7
@@ -64,14 +60,16 @@ services:
     networks:
       - observability-series-kotlin-edition-network
     depends_on:
-      - prometheus
-      - alertmanager
+      prometheus:
+        condition: service_healthy
+      alertmanager:
+        condition: service_started
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:3000/api/health"]
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:3000/api/health" ]
 
 networks:
   observability-series-kotlin-edition-network:
-    driver: bridge
+    name: observability-series-kotlin-edition-network
 
 volumes:
   prometheus-data:

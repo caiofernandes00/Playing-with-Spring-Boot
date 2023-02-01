@@ -1,6 +1,8 @@
 ############################# DOCKER #############################
 docker_up:
-	docker compose up grafana --build --remove-orphans --force-recreate
+	docker compose up alertmanager -d --build --remove-orphans --force-recreate
+	docker compose up prometheus -d --build --remove-orphans --force-recreate
+	docker compose up grafana -d --build --remove-orphans --force-recreate
 
 docker_down:
 	docker compose down grafana --remove-orphans --force-recreate
