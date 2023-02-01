@@ -16,7 +16,7 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets:
-          - 'localhost:9090'
+          - 'observability-series-kotlin-edition-prometheus:9090'
 
 alerting:
   alertmanagers:

@@ -2,7 +2,6 @@ global:
   resolve_timeout: 5m
 
 route:
-  #  TODO: Understand all the options
   receiver: 'observability-series-kotlin-edition-app'
   group_by: ['alertname']
   group_wait: 10s
