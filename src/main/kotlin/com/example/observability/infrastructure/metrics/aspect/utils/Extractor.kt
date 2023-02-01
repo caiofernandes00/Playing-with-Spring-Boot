@@ -1,7 +1,7 @@
 package com.example.observability.infrastructure.metrics.aspect.utils
 
-import com.example.observability.infrastructure.metrics.aspect.utils.Tags.METHOD
-import com.example.observability.infrastructure.metrics.aspect.utils.Tags.PATH
+import com.example.observability.infrastructure.metrics.aspect.utils.MetricTags.METHOD
+import com.example.observability.infrastructure.metrics.aspect.utils.MetricTags.PATH
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

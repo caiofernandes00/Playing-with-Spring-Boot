@@ -17,5 +17,5 @@ class UsersController(
     @ResponseStatus(HttpStatus.OK)
     @CounterMetric(name = "get_users_list_counter", description = "Get users list", tags = ["tag1", "tag2"])
     @ElapsedTimeMetric(name = "get_users_list_timer", description = "Get users list", tags = ["tag1", "tag2"])
-    fun getUsers(): GetUsersOutput = throw Exception("Error")
+    fun getUsers(): GetUsersOutput = getUsersListUseCase.getAll()
 }
