@@ -2,7 +2,7 @@ package com.example.observability.infrastructure.metrics.annotation
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FUNCTION)
-annotation class TimerMetric(
+annotation class ElapsedTimeMetric(
     val name: String,
     val description: String,
     vararg val tags: String
