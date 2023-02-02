@@ -24,6 +24,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+//    implementation("com.grafana.loki:loki-java-client:0.9.0")
+//    implementation("io.micrometer:micrometer-registry-loki")
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("com.google.guava:guava:21.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

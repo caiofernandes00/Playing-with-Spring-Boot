@@ -1,0 +1,22 @@
+server:
+  http_listen_port: 9080
+
+scrape_configs:
+  - job_name: services
+    static_configs:
+      - targets:
+          - host.docker.internal:8080
+    relabel_configs:
+      - source_labels: [__path__]
+        target_label: __file__
+      - source_labels: [__host__]
+        target_label: __host__
+      - target_label: job
+        replacement: system
+    tail_files:
+      - /var/log/syslog
+      - /var/log/auth.log
+
+loki:
+  url: http://observability-series-kotlin-edition-loki:3100/loki/api/v1/push
+  timeout: 10s

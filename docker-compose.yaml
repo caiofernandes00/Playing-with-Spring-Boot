@@ -12,6 +12,37 @@ services:
     healthcheck:
       test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:8080/actuator/health" ]
 
+  loki:
+    image: grafana/loki:2.2.1
+    container_name: observability-series-kotlin-edition-loki
+    ports:
+      - "3100:3100"
+    networks:
+      - observability-series-kotlin-edition-network
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./.docker/loki/local-config.yaml:/etc/loki/local-config.yaml
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:3100/ready" ]
+
+  promtail:
+    image: grafana/promtail:2.2.1
+    container_name: observability-series-kotlin-edition-promtail
+    ports:
+      - "9080:9080"
+    networks:
+      - observability-series-kotlin-edition-network
+    command:
+      - -config.file=/etc/promtail/promtail.yaml
+    volumes:
+      - ./.docker/promtail/promtail.yaml:/etc/promtail/promtail.yaml
+    depends_on:
+      loki:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:9080/ready" ]
+
   prometheus:
     image: prom/prometheus
     container_name: observability-series-kotlin-edition-prometheus
@@ -64,6 +95,8 @@ services:
         condition: service_healthy
       alertmanager:
         condition: service_started
+      loki:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "-q", "-O", "-", "http://localhost:3000/api/health" ]
 

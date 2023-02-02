@@ -1,8 +1,68 @@
+spring:
+  application:
+    name: spring-boot-observability
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: prometheus
   endpoint:
     prometheus:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      instance: ${spring.application.instance_id:${random.value}}
+    distribution:
+      percentiles: 0.5,0.75,0.95,0.98,0.99,0.999
+    export:
+      prometheus:
+        enabled: true
+        step: 10s
+        description-as-value: true
+        description-as-total: true
+        description-as-base-unit: true
+        description-as-base-unit-time: true
+        description-as-percentage: true
+        description-as-percentage-time: true
+        description-as-rate: true
+        description-as-rate-time: true
+        description-as-count: true
+        description-as-count-time: true
+        description-as-total-time: true
+        description-as-total-count: true
+        description-as-total-count-time: true
+        description-as-total-amount: true
+        description-as-total-amount-time: true
+        description-as-amount: true
+        description-as-amount-time: true
+        description-as-amount-count: true
+        description-as-amount-count-time: true
+        description-as-amount-total: true
+        description-as-amount-total-time: true
+        description-as-amount-total-count: true
+        description-as-amount-total-count-time: true
+        description-as-amount-percentage: true
+        description-as-amount-percentage-time: true
+        description-as-amount-percentage-count: true
+        description-as-amount-percentage-count-time: true
+        description-as-amount-percentage-total: true
+        description-as-amount-percentage-total-time: true
+        description-as-amount-percentage-total-count: true
+        description-as-amount-percentage-total-count-time: true
+        description-as-amount-rate: true
+        description-as-amount-rate-time: true
+        description-as-amount-rate-count: true
+        description-as-amount-rate-count-time: true
+        description-as-amount-rate-total: true
+        description-as-amount-rate-total-time: true
+        description-as-amount-rate-total-count: true
+        description-as-amount-rate-total-count-time: true
+        description-as-amount-rate-percentage: true
+        description-as-amount-rate-percentage-time: true
+        description-as-amount-rate-percentage-count: true
+        description-as-amount-rate-percentage-count-time: true
+        description-as-amount-rate-percentage-total: true
+        description-as-amount-rate-percentage-total-time: true
+        description-as-amount-rate-percentage-total-count: true
+        description-as-amount-rate-percentage-total-count-time: true
